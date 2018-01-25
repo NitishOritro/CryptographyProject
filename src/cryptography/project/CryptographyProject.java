@@ -6,6 +6,7 @@
 package cryptography.project;
 
 import com.letter.cyptography.LetterInNumber;
+import static java.lang.Character.isLetter;
 import java.util.Random;
 
 /**
@@ -23,15 +24,28 @@ public class CryptographyProject
         String plaintext = "BANGLADESH BEAUTIFUL MY NUMBER 12";
         int lengthOfPlaintext = plaintext.length();
         System.out.println("Length of plaintext is "+lengthOfPlaintext);
-        LetterInNumber letterInNumber = new LetterInNumber(plaintext.charAt(8));
-        System.out.println("Character number conversion is "+letterInNumber.getNumber());
+        LetterInNumber letterInNumberCheck = new LetterInNumber(plaintext.charAt(8));
+        System.out.println("Character number conversion is "+letterInNumberCheck.getNumber());
         
-        LetterInNumber NumberInLetter = new LetterInNumber(16);
-        System.out.println("Number conversion is in Character "+NumberInLetter.getLetter());
+        LetterInNumber numberInLetterCheck = new LetterInNumber(26);
+        System.out.println("Number conversion is in Character "+numberInLetterCheck.getLetter());
         
-        Random rand = new Random();
-        
-        
+        //Random rand = new Random();
+        int i,j,k;
+        String ciphertext = "";
+        for(i=0;i<plaintext.length();i++)
+        {
+            if(Character.isLetter(plaintext.charAt(i)) && plaintext.charAt(i) != ' ')
+            {
+                LetterInNumber letterInNumber = new LetterInNumber(plaintext.charAt(i));
+                int cipherValue =  (letterInNumber.getNumber() + 3) % 26;       //(p+n) mod 26
+                
+                LetterInNumber numberInLetter = new LetterInNumber(cipherValue);
+                char cipherCharacter = numberInLetter.getLetter();
+                ciphertext = ciphertext + cipherCharacter;
+            }
+        }
+        System.out.println("CipherText is" +ciphertext);
         
     }
     
