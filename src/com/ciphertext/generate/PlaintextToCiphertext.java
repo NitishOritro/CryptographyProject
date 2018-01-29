@@ -6,24 +6,25 @@
 package com.ciphertext.generate;
 
 import com.letter.cyptography.LetterInNumber;
+import java.util.Random;
 
 /**
  *
- * @author ahsan
+ * @author Nitish Ranjan Bhownmik
  */
 public class PlaintextToCiphertext 
 {
     int i,j,k,row=16,column=0;
     String ciphertext = "";
     
-    public String generateCipherText(String plaintext)
+    public String generateCipherText(String plaintext, int n)
     {
         for(i=0;i<plaintext.length();i++)
         {
             if(Character.isLetter(plaintext.charAt(i)) && plaintext.charAt(i) != ' ')
             {
                 LetterInNumber letterInNumber = new LetterInNumber(plaintext.charAt(i));
-                int cipherValue =  (letterInNumber.getNumber() + 3) % 26;       //(p+n) mod 26
+                int cipherValue =  (letterInNumber.getNumber() + n) % 26;       //(p+n) mod 26
                 
                 if(cipherValue == 0)
                 {
