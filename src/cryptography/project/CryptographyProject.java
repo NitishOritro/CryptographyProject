@@ -22,10 +22,10 @@ public class CryptographyProject
      */
     public static void main(String[] args) 
     {
-        String plaintext = "BANGLADESH BEAUTIFUL MY NUMBER 12";
+        String plaintext = "BANGLADESH BEAUTIFUL MY NUMBER 12#@&";
         int lengthOfPlaintext = plaintext.length();
         System.out.println("Length of plaintext is "+lengthOfPlaintext);
-        LetterInNumber letterInNumberCheck = new LetterInNumber(plaintext.charAt(8));
+        LetterInNumber letterInNumberCheck = new LetterInNumber(plaintext.charAt(26));
         System.out.println("Character number conversion is "+letterInNumberCheck.getNumber());
         
         LetterInNumber numberInLetterCheck = new LetterInNumber(26);
@@ -43,7 +43,13 @@ public class CryptographyProject
                 LetterInNumber letterInNumber = new LetterInNumber(plaintext.charAt(i));
                 int cipherValue =  (letterInNumber.getNumber() + 3) % 26;       //(p+n) mod 26
                 
+                if(cipherValue == 0)
+                {
+                    cipherValue = 26;
+                }
+                    
                 LetterInNumber numberInLetter = new LetterInNumber(cipherValue);
+                
                 char cipherCharacter = numberInLetter.getLetter();
                 ciphertext = ciphertext + cipherCharacter;
             }
@@ -54,7 +60,9 @@ public class CryptographyProject
         }
         System.out.println("CipherText is : " +ciphertext);
         
-        if(plaintext.length() % 16 == 0)
+        //Divide a row column accorfing to detect cipherRotor machine
+        
+        if(plaintext.length() % 16 == 0) 
         {
             column = plaintext.length() / 16;
         }
@@ -93,6 +101,54 @@ public class CryptographyProject
             }
             System.out.println();
         }
+        
+        for(i=0;i<row;i++)
+        {
+            for(j=0;j<column;j++)
+            {
+                if(Character.isLetter(ciphertextRotor[i][j]) && ciphertextRotor[i][j] != ' ')
+                {
+                    LetterInNumber cipherInNumber = new LetterInNumber(ciphertextRotor[i][j]);
+                    int cipherValue =  (cipherInNumber.getNumber() + i) % 26;       //(c+rowNum) mod 26
+                    
+                    if(cipherValue == 0)
+                    {
+                        cipherValue = 26;
+                    }
+                    
+                    LetterInNumber cipherInLetter = new LetterInNumber(cipherValue);
+                    ciphertextRotor[i][j] = cipherInLetter.getLetter();
+                    //ciphertext = ciphertext + cipherCharacter;
+                    
+                }//ciphertextRotor [row][column] = plaintext.charAt(j);
+                 //System.out.print(" ("+i+" "+j+")"+ciphertextRotor [i][j]+"   ");
+                
+                
+                
+            }
+            //System.out.println();
+        }
+        
+        System.out.println();System.out.println();
+        for(i=0;i<row;i++)
+        {
+            for(j=0;j<column;j++)
+            {
+                //ciphertextRotor [row][column] = plaintext.charAt(j);
+                 System.out.print(" ("+i+" "+j+")"+ciphertextRotor [i][j]+"   ");
+            }
+            System.out.println();
+        }
+        String ciphertextGenerate = "";
+        for(i=0;i<column;i++)
+        {
+            for(j=0;j<row;j++)
+            {
+                ciphertextGenerate = ciphertextGenerate + ciphertextRotor [j][i];
+            }
+        }
+        
+        System.out.println("Generate CipherText is : " +ciphertextGenerate);
     }
     
 }
