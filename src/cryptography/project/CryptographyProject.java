@@ -51,7 +51,7 @@ public class CryptographyProject
         ciphertext = plaintextToCiphertext.generateCipherText(plaintext, n);
         int i,j,k,row=16,column=0;
         
-        System.out.println("CipherText is : " +ciphertext);
+        //System.out.println("CipherText is : " +ciphertext);
         
         //Divide a row column accorfing to detect cipherRotor machine
         

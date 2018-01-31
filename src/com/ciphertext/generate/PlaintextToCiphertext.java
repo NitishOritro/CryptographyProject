@@ -30,6 +30,10 @@ public class PlaintextToCiphertext
                 {
                     cipherValue = 26;
                 }
+                if(cipherValue < 0)
+                {
+                    cipherValue = cipherValue + 26;
+                }
                     
                 LetterInNumber numberInLetter = new LetterInNumber(cipherValue);
                 
@@ -64,7 +68,7 @@ public class PlaintextToCiphertext
                     break;
                 }
             }
-            System.out.println(pointer);
+            //System.out.println(pointer);
         }
         
         for(i=0;i<row;i++)
